@@ -37,16 +37,14 @@ module.exports = function(app) {
         }
     });
 
-    app.get("/getData", function(req, res){
-        const collection = req.app.locals.collection;
-        collection.find({}).toArray(function(err, users){
-            if(err) return console.log(err);
-            res.send(users)
-        });
-
+    app.post('/getUsers',async function(req, res, next) {
+        console.log('function find()');
+        let users = await User.find({});
+        console.log("getUsers: ",users);
+        if(users) res.send(users);
     });
 
-    app.put("/putData", jsonParser, function(req, res){
+/*    app.put("/putData", jsonParser, function(req, res){
 
         if(!req.body) return res.sendStatus(400);
         const id = new objectId(req.body.id);
@@ -63,7 +61,7 @@ module.exports = function(app) {
                 const user = result.value;
                 res.send(user);
             });
-    });
+    });*/
 
 
 

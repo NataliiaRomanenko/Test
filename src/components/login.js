@@ -3,6 +3,7 @@ import React from 'react';
 
 
 
+
 class Login extends React.Component {
     constructor (props) {
 
@@ -14,6 +15,7 @@ class Login extends React.Component {
                 email:"",
                 password:"",
             },
+            usersArr:[]
 
 
 
@@ -42,21 +44,30 @@ class Login extends React.Component {
         };
         return false;//!!тоже важно иначе зацикливается
     };
+
     handleChange =(e)=> {
         this.setState({ [e.target.name]: e.target.value });
     };
-    getUsers = (e)=> {
-        e.preventDefault();//!!важно иначе зацикливается
-        var data = db.getCollection("users");
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/getData',true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        console.log(data);
-        xhr.send(data);
-    }
-    render() {
 
+    getUsers = (e)=> {
+        console.log('getUsers');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/getUsers',true);
+        xhr.send();
+        xhr.onload = () => {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                    //console.log('UP xhr.response: ',xhr.response);
+                    let users = JSON.parse(xhr.response);
+                    console.log('UP xhr.response users: ',users);
+                    this.setState({usersArr: users})
+                }
+            }
+        };
+    };
+
+    render() {
+    console.log("state: ",this.state.usersArr);
     return (
         <div>
             <h2>Please, log in</h2>
@@ -81,7 +92,7 @@ class Login extends React.Component {
             </form>
 
             <h2>Users table</h2>
-            <button onClick={()=>this.getUsers}>Get users</button>
+            <button onClick={()=>this.getUsers()}>Get users</button>
             <div className="usersTable">
                 <div className="usersTableHeader">
                     <div>User name</div>
@@ -89,12 +100,19 @@ class Login extends React.Component {
                     <div>User email</div>
                     <div>User password</div>
                 </div>
-                <div className="usersTableContent">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+
+                    {this.state.usersArr.map((user, i)=>{
+                        return ( <div className="usersTableContent" key={user.username+i}>
+                            <div>{user.username}</div>
+                            <div>{user.age}</div>
+                            <div>{user.email}</div>
+                            <div>{user.password}</div>
+                            </div>
+                        )
+                        }
+                    )}
+
+
             </div>
         </div>
 
