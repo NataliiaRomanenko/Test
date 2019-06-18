@@ -1,15 +1,13 @@
 {
-  "port": 7777,
+  "port": 7778,
   "AdministratorId": "5a97c4eb0d1b2b07281cda93",
   "mongoose": {
-    "url": "mongodb://localhost/EMPS",
+    "url": "mongodb://localhost:27017/NataTest",
     "options": {
-      "server": {
-        "socketOptions": {
-          "keepAlive": 1
-        }
-      }
+      "useNewUrlParser": true,
+      "useCreateIndex": true
     }
+
   },
   "session": {
     "secret": "FackYouSpielbirg",
@@ -22,5 +20,6 @@
       "maxAge": null
     }
   }
+
 }
 

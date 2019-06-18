@@ -92,28 +92,38 @@ class Login extends React.Component {
             </form>
 
             <h2>Users table</h2>
-            <button onClick={()=>this.getUsers()}>Get users</button>
-            <div className="usersTable">
-                <div className="usersTableHeader">
-                    <div>User name</div>
-                    <div>User age</div>
-                    <div>User email</div>
-                    <div>User password</div>
-                </div>
-
-                    {this.state.usersArr.map((user, i)=>{
-                        return ( <div className="usersTableContent" key={user.username+i}>
-                            <div>{user.username}</div>
-                            <div>{user.age}</div>
-                            <div>{user.email}</div>
-                            <div>{user.password}</div>
-                            </div>
-                        )
+            <button onClick={()=>this.getUsers()}>Get users!!!!</button>
+            {this.state.usersArr.length ?
+                <div className="usersTable">
+                    <table className="userTable bordered">
+                        <thead>
+                            <tr>
+                                <th>User name</th>
+                                <th>User age</th>
+                                <th>User email</th>
+                                <th>User password</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        { this.state.usersArr.map((user, i)=>{
+                            return(
+                                <tr key={user.username+i}>
+                                    <td>{user.username}</td>
+                                    <td>{user.age}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.password}</td>
+                                </tr>
+                            )
+                        })
                         }
-                    )}
+                        </tbody>
+                    </table>
+                </div>
+                :
+                ""
 
+            }
 
-            </div>
         </div>
 
     )

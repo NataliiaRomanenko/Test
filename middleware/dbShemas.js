@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var config = require('../config');
 var util = require('util');
 
-mongoose.connect(config.get('mongoose:url'), config.get('mongoose.options'));
+//console.log('mongooseClientConOpt: ',config.get('mongoose:options'),' ,url: ',config.get('mongoose:url'));
+mongoose.connect(config.get('mongoose:url'), config.get('mongoose:options'));
 
 var user = new mongoose.Schema({
     username: {type: String, unique: true, required: true},//lowercase: true,
