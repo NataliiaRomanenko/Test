@@ -26,3 +26,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.userTable{
+  width: 100%;
+  margin-top: 20px;
+}
+.bordered th,
+.bordered td{
+  border:1px solid #ddd;
+  padding: 5px;
+  color: #000;
+}
