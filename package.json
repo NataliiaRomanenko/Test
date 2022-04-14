@@ -7,7 +7,7 @@
     "start": "node ./bin/www"
   },
   "devDependencies": {
-    "async": "^2.6.0",
+    "async": "^3.2.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-react-transform": "^3.0.0",
